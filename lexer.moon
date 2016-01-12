@@ -1,5 +1,3 @@
-print = print
-
 howl.aux.lpeg_lexer ->
   c = capture
 
@@ -9,7 +7,7 @@ howl.aux.lpeg_lexer ->
 
   identifer = c 'identifer', ident
 
-  comment = c 'comment', (Cmt('/', comment_func) + '/ ') * scan_until eol
+  comment = c 'comment', (space^1 * '/' + Cmt('/', comment_func)) * scan_until eol
 
   keyword = c 'keyword', '_' * (alpha + digit + '_')^2 + word {
     'if', 'while', 'do'
